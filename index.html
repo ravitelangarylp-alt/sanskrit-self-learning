@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanskrit Learning · Home</title>
+    <meta name="description" content="Bilingual Sanskrit learning engine — main hub. Navigate to individual levels.">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Kannada:wght@400;600;700;800;900&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ---- Shared CSS ---- */
+        :root{
+          --bg:#07090f;--surf:#0e1221;--s2:#151c30;--s3:#1c2540;--s4:#232e50;
+          --bdr:rgba(255,255,255,0.07);--bdr2:rgba(255,255,255,0.13);
+          --txt:#dde4f8;--muted:#6b7898;--muted2:#3d4a6e;
+          --saffron:#f97316;--gold:#f59e0b;--gold2:#fde68a;
+          --masc:#60a5fa;--fem:#f472b6;--neut:#34d399;--self:#a78bfa;
+          --r:18px;--r2:12px;
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;line-height:1.6}
+        body::before{content:'';position:fixed;width:140vmax;height:140vmax;top:50%;left:50%;transform:translate(-50%,-50%);background:conic-gradient(from 0deg,rgba(249,115,22,.022) 0deg,rgba(245,158,11,.038) 50deg,rgba(96,165,250,.022) 105deg,rgba(244,114,182,.022) 160deg,rgba(52,211,153,.018) 220deg,rgba(167,139,250,.022) 265deg,rgba(249,115,22,.028) 320deg,rgba(249,115,22,.022) 360deg);border-radius:50%;pointer-events:none;z-index:0;animation:mandala 220s linear infinite}
+        @keyframes mandala{to{transform:translate(-50%,-50%) rotate(360deg)}}
+        body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 55% 45% at 8% 8%,rgba(249,115,22,.065) 0,transparent 52%),radial-gradient(ellipse 45% 55% at 92% 88%,rgba(96,165,250,.065) 0,transparent 52%);pointer-events:none;z-index:0}
+        .app{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 16px 80px}
+
+        /* Lang toggle */
+        #lang-toggle{position:fixed;top:14px;right:14px;z-index:999;background:var(--s3);border:1px solid var(--bdr2);border-radius:50px;padding:8px 16px;cursor:pointer;font-size:.78rem;font-weight:700;color:var(--gold2);display:flex;align-items:center;gap:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);transition:all .22s}
+        #lang-toggle:hover{background:var(--s4)}
+
+        /* Header */
+        .hdr{text-align:center;padding:60px 16px 36px}
+        .om{font-family:'Tiro Devanagari Sanskrit',serif;font-size:5rem;line-height:1;display:block;background:linear-gradient(135deg,var(--saffron),var(--gold2),var(--saffron));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:omPulse 4s ease-in-out infinite;margin-bottom:18px}
+        @keyframes omPulse{0%,100%{filter:drop-shadow(0 0 12px rgba(249,115,22,.35))}50%{filter:drop-shadow(0 0 38px rgba(245,158,11,.75))}}
+        .hdr-title{font-size:clamp(1.5rem,5vw,2.8rem);font-weight:800;background:linear-gradient(90deg,var(--saffron) 0%,#fff 42%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.03em;margin-bottom:6px}
+        .hdr-sub{font-size:.82rem;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+        .hdr-badge{display:inline-flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bdr2);border-radius:50px;padding:7px 20px;font-size:.72rem;color:var(--muted)}
+        .hdr-badge b{color:var(--gold)}
+
+        /* Track */
+        .track{display:flex;align-items:center;justify-content:center;margin:32px auto 0;max-width:760px;padding:0 8px;gap:0}
+        .step{display:flex;flex-direction:column;align-items:center;gap:7px;flex:1;min-width:0}
+        .dot{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;border:2px solid var(--bdr2);background:var(--s2);color:var(--muted2);transition:all .5s;flex-shrink:0;cursor:default;text-decoration:none}
+        .dot.active{border-color:var(--saffron);color:var(--saffron);box-shadow:0 0 28px rgba(249,115,22,.5);pointer-events:none}
+        .dot.done{background:linear-gradient(135deg,var(--neut),#22c55e);border-color:transparent;color:#0a2a1c;box-shadow:0 0 20px rgba(52,211,153,.45);font-size:1.1rem;cursor:pointer}
+        .dot.locked{opacity:.25;pointer-events:none}
+        .slbl{font-size:.6rem;color:var(--muted2);text-align:center;line-height:1.35;max-width:72px}
+        .slbl.active{color:var(--saffron)}
+        .conn{flex:1;height:2px;background:var(--bdr);margin:0 3px 28px;transition:background .6s;min-width:8px}
+        .conn.done{background:linear-gradient(90deg,var(--neut),#22c55e)}
+
+        /* Profile badge */
+        #profile-badge{position:fixed;top:14px;left:14px;z-index:999;display:flex;align-items:center;gap:8px;background:var(--s3);border:1px solid var(--bdr2);border-radius:50px;padding:7px 16px;font-size:.78rem;box-shadow:0 4px 18px rgba(0,0,0,.4);transition:all .22s;max-width:220px;cursor:pointer}
+        #profile-badge:hover{background:var(--s4)}
+        #profile-badge .av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--saffron),var(--gold));display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;color:#0a0a0a;flex-shrink:0}
+        #profile-badge .pname{font-weight:700;color:var(--gold2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px}
+        #profile-badge .plvl{font-size:.62rem;color:var(--muted);margin-top:1px}
+
+        /* Leaderboard */
+        .pdiv{display:flex;align-items:center;gap:14px;font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin:44px 0 20px}
+        .pdiv::before,.pdiv::after{content:'';flex:1;height:1px;background:var(--bdr)}
+        .card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);box-shadow:0 16px 56px rgba(0,0,0,.6);overflow:hidden;margin-bottom:24px}
+        .card-head{display:flex;align-items:center;gap:14px;padding:20px 26px;border-bottom:1px solid var(--bdr)}
+        .ci{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+        .ct{font-size:1.08rem;font-weight:800}
+        .cs{font-size:.73rem;color:var(--muted);margin-top:3px}
+        .cb{padding:26px}
+        .lb-wrap{display:flex;flex-direction:column;gap:9px}
+        .lb-item{display:flex;align-items:center;gap:14px;padding:13px 18px;background:var(--s2);border:1px solid var(--bdr);border-radius:var(--r2);transition:border-color .2s}
+        .lb-item:hover{border-color:var(--bdr2)}
+        .lb-rank{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.88rem;flex-shrink:0}
+        .lb-rank.gold{background:linear-gradient(135deg,#f59e0b,#fde68a);color:#0a0a0a}
+        .lb-rank.silver{background:linear-gradient(135deg,#94a3b8,#cbd5e1);color:#0a0a0a}
+        .lb-rank.bronze{background:linear-gradient(135deg,#c2410c,#f97316);color:#fff}
+        .lb-rank.other{background:var(--s3);color:var(--muted)}
+        .lb-name{flex:1;font-weight:600;font-size:.92rem}
+        .lb-date{font-size:.66rem;color:var(--muted2)}
+        .lb-score-wrap{text-align:right}
+        .lb-score{font-weight:800;font-size:1.3rem;display:block}
+        .lb-pct{font-size:.68rem;color:var(--muted);margin-top:1px}
+        .lb-score.perfect{color:var(--gold2)}
+        .lb-score.great{color:var(--neut)}
+        .lb-score.good{color:var(--masc)}
+        .lb-score.ok{color:var(--muted)}
+        .lb-empty{text-align:center;padding:40px;color:var(--muted);font-size:.9rem}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:50px;border:none;font-size:.86rem;font-weight:700;cursor:pointer;transition:all .22s;margin:0}
+        .bg{background:var(--s2);color:var(--txt);border:1px solid var(--bdr2)}
+        .bg:hover{border-color:var(--gold);color:var(--gold)}
+        .brow{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+        .hidden{display:none!important}
+        @media(max-width:600px){.card-head{padding:16px 18px}.cb{padding:18px}}
+    </style>
+</head>
+<body>
+    <button id="lang-toggle" onclick="toggleLang()">
+        <span>🌐</span><span id="lang-label">ಕನ್ನಡ</span>
+    </button>
+
+    <!-- Profile badge -->
+    <div id="profile-badge" class="hidden" onclick="document.getElementById('reset-modal')?.classList?.add('show')">
+        <div class="av" id="pb-av">?</div>
+        <div>
+            <div class="pname" id="pb-name">—</div>
+            <div class="plvl" id="pb-lvl">Tap to reset</div>
+        </div>
+    </div>
+
+    <div class="app">
+        <!-- Header / Track -->
+        <header class="hdr">
+            <span class="om">ॐ</span>
+            <h1 class="hdr-title" id="hdr-t">Sanskrit Self‑Learning Engine</h1>
+            <p class="hdr-sub" id="hdr-s">Complete Bilingual Learning System</p>
+            <div class="hdr-badge">📚 <b>4</b> <span>Levels</span> · <b>200</b> Q · <b>Grand Exam</b> · <span>Leaderboard</span></div>
+
+            <div class="track">
+                <div class="step"><a class="dot locked" id="d1" href="level1.html">I</a><div class="slbl" id="l1">Pronouns<br>& Sentences</div></div>
+                <div class="conn" id="c1"></div>
+                <div class="step"><a class="dot locked" id="d2" href="level2.html">II</a><div class="slbl" id="l2">Verbs<br>& Tenses</div></div>
+                <div class="conn" id="c2"></div>
+                <div class="step"><a class="dot locked" id="d3" href="level3.html">III</a><div class="slbl" id="l3">Vibhaktis</div></div>
+                <div class="conn" id="c3"></div>
+                <div class="step"><a class="dot locked" id="d4" href="level4.html">IV</a><div class="slbl" id="l4">Avyayas</div></div>
+                <div class="conn" id="c4"></div>
+                <div class="step"><a class="dot locked" id="d5" href="grand-exam.html" style="font-size:.7rem">🏆</a><div class="slbl" id="l5">Grand<br>Exam</div></div>
+            </div>
+        </header>
+
+        <!-- Leaderboard -->
+        <div class="pdiv" id="pdiv-lb">🥇 Leaderboard</div>
+        <div class="card">
+            <div class="card-head"><div class="ci" style="background:rgba(245,158,11,.15)">🥇</div><div><div class="ct" id="lb-title">Top Performers</div><div class="cs" id="lb-sub">Grand Exam · stored in your browser</div></div></div>
+            <div class="cb">
+                <div class="lb-wrap" id="lb-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ── shared constants & helpers ──
+        const SK_KEY = 'sk_player';
+        const SK_LB  = 'sk_lb';
+        let LANG = 'e';
+        function L(k,e){ return LANG==='k' ? k : e; }
+
+        // Profile
+        function loadPlayer(){
+            try{ return JSON.parse(localStorage.getItem(SK_KEY)||'null'); }catch(e){ return null; }
+        }
+        function savePlayer(pl){
+            localStorage.setItem(SK_KEY, JSON.stringify(pl));
+        }
+
+        function updateUI(){
+            const pl = loadPlayer();
+            LANG = (pl && pl.lang) || 'e';
+            document.getElementById('lang-label').textContent = LANG==='e' ? 'ಕನ್ನಡ' : 'English';
+            renderTrack();
+            updateProfileBadge();
+            renderLeaderboard();
+        }
+
+        // Track
+        function renderTrack(){
+            const pl = loadPlayer();
+            const level = pl ? pl.highestUnlockedLevel || 1 : 0;
+            const dots = ['d1','d2','d3','d4','d5'];
+            const conns = ['c1','c2','c3','c4'];
+            const labels = ['l1','l2','l3','l4','l5'];
+            const pages = ['level1.html','level2.html','level3.html','level4.html','grand-exam.html'];
+            dots.forEach((id,i)=>{
+                const el = document.getElementById(id);
+                if(!el) return;
+                el.classList.remove('active','done','locked');
+                el.classList.add(i+1 <= level ? 'done' : 'locked');
+                if(i+1 <= level) el.textContent = '✓';
+                else if(i+1 === level+1) el.classList.add('active');
+                el.href = pages[i];
+                el.style.pointerEvents = (i+1 <= level) ? 'auto' : 'none';
+            });
+            conns.forEach((id,i)=>{
+                const el = document.getElementById(id);
+                if(!el) return;
+                el.classList.toggle('done', i+1 <= level-1);
+            });
+            labels.forEach((id,i)=>{
+                const el = document.getElementById(id);
+                if(!el) return;
+                el.classList.toggle('active', i+1 === level);
+            });
+        }
+
+        // Profile badge
+        function updateProfileBadge(){
+            const pl = loadPlayer();
+            const badge = document.getElementById('profile-badge');
+            if(!pl || !pl.name) { badge.classList.add('hidden'); return; }
+            badge.classList.remove('hidden');
+            document.getElementById('pb-av').textContent = pl.name.charAt(0).toUpperCase();
+            document.getElementById('pb-name').textContent = pl.name;
+            const lvl = pl.highestUnlockedLevel || 1;
+            const levels = ['','Level 1','Level 2','Level 3','Level 4','Grand'];
+            document.getElementById('pb-lvl').textContent = `${levels[lvl] || levels[4]} unlocked · Click to reset`;
+        }
+
+        // Toggle language
+        function toggleLang(){
+            LANG = LANG==='e' ? 'k' : 'e';
+            const pl = loadPlayer();
+            if(pl) { pl.lang = LANG; savePlayer(pl); }
+            document.getElementById('lang-label').textContent = LANG==='e' ? 'ಕನ್ನಡ' : 'English';
+            // (Leaderboard text stays static for now)
+        }
+
+        // Leaderboard
+        function renderLeaderboard(){
+            const scores = JSON.parse(localStorage.getItem(SK_LB)||'[]').slice(0,10);
+            const lb = document.getElementById('lb-body');
+            if(!scores.length){
+                lb.innerHTML = `<div class="lb-empty"><div style="font-size:3rem;margin-bottom:12px;opacity:.4">🏅</div><div style="font-weight:700;font-size:1rem;margin-bottom:8px">No scores yet</div><div style="font-size:.82rem;line-height:1.6">Complete the Grand Exam and save your name!</div></div>`;
+                return;
+            }
+            lb.innerHTML = `<div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted2);letter-spacing:.06em;text-transform:uppercase;padding:0 18px;margin-bottom:8px"><span>Rank · Name</span><span>Score / %</span></div>`+
+            scores.map((s,i)=>{
+                const rankCls=i===0?'gold':i===1?'silver':i===2?'bronze':'other';
+                const rankIcon=i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1;
+                const pct = Math.round(s.score/(s.total||100)*100);
+                const barCol = pct>=90?'var(--neut)':pct>=70?'var(--gold)':pct>=50?'var(--saffron)':'var(--fem)';
+                const scoreCls = pct>=90?'perfect':pct>=70?'great':pct>=50?'good':'ok';
+                return `<div class="lb-item">
+                    <div class="lb-rank ${rankCls}">${rankIcon}</div>
+                    <div style="flex:1;min-width:0">
+                        <div class="lb-name">${s.name}${i===0?' 👑':''}</div>
+                        <div style="margin-top:6px;max-width:240px">
+                            <div style="height:5px;background:var(--s3);border-radius:3px;overflow:hidden">
+                                <div style="height:100%;width:${pct}%;background:${barCol};border-radius:3px"></div>
+                            </div>
+                        </div>
+                        <div class="lb-date">${s.date||''} · ${s.total||100} Q</div>
+                    </div>
+                    <div class="lb-score-wrap">
+                        <span class="lb-score ${scoreCls}">${s.score}<span style="font-size:.6em;font-weight:400;color:var(--muted)">/${s.total||100}</span></span>
+                        <div class="lb-pct" style="color:${barCol}">${pct}%</div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', updateUI);
+    </script>
+</body>
+</html>
