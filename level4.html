@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 4 · Avyaya Mastery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Kannada:wght@400;600;700;800;900&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{
+          --bg:#07090f;--surf:#0e1221;--s2:#151c30;--s3:#1c2540;--s4:#232e50;
+          --bdr:rgba(255,255,255,0.07);--bdr2:rgba(255,255,255,0.13);
+          --txt:#dde4f8;--muted:#6b7898;--muted2:#3d4a6e;
+          --saffron:#f97316;--gold:#f59e0b;--gold2:#fde68a;
+          --masc:#60a5fa;--fem:#f472b6;--neut:#34d399;--self:#a78bfa;
+          --r:18px;--r2:12px;
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;line-height:1.6}
+        body::before{content:'';position:fixed;width:140vmax;height:140vmax;top:50%;left:50%;transform:translate(-50%,-50%);background:conic-gradient(from 0deg,rgba(249,115,22,.022) 0deg,rgba(245,158,11,.038) 50deg,rgba(96,165,250,.022) 105deg,rgba(244,114,182,.022) 160deg,rgba(52,211,153,.018) 220deg,rgba(167,139,250,.022) 265deg,rgba(249,115,22,.028) 320deg,rgba(249,115,22,.022) 360deg);border-radius:50%;pointer-events:none;z-index:0;animation:mandala 220s linear infinite}
+        @keyframes mandala{to{transform:translate(-50%,-50%) rotate(360deg)}}
+        body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 55% 45% at 8% 8%,rgba(249,115,22,.065) 0,transparent 52%),radial-gradient(ellipse 45% 55% at 92% 88%,rgba(96,165,250,.065) 0,transparent 52%);pointer-events:none;z-index:0}
+        .app{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 16px 80px}
+
+        #lang-toggle{position:fixed;top:14px;right:14px;z-index:999;background:var(--s3);border:1px solid var(--bdr2);border-radius:50px;padding:8px 16px;cursor:pointer;font-size:.78rem;font-weight:700;color:var(--gold2);display:flex;align-items:center;gap:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);transition:all .22s}
+        #lang-toggle:hover{background:var(--s4)}
+
+        .hdr{text-align:center;padding:40px 16px 20px}
+        .om{font-family:'Tiro Devanagari Sanskrit',serif;font-size:4rem;display:block;background:linear-gradient(135deg,var(--saffron),var(--gold2),var(--saffron));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:omPulse 4s ease-in-out infinite;margin-bottom:12px}
+        @keyframes omPulse{0%,100%{filter:drop-shadow(0 0 12px rgba(249,115,22,.35))}50%{filter:drop-shadow(0 0 38px rgba(245,158,11,.75))}}
+        .back-link{display:inline-block;margin-top:6px;font-size:.8rem;color:var(--muted)}
+
+        .tnav{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:24px}
+        .tb{padding:9px 18px;border-radius:50px;border:1px solid var(--bdr2);background:var(--s2);color:var(--muted);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .22s;white-space:nowrap}
+        .tb:hover{color:var(--txt);border-color:var(--gold)}
+        .tb.on{background:linear-gradient(135deg,var(--saffron),#c2410c);color:#fff;border-color:transparent;box-shadow:0 4px 18px rgba(249,115,22,.38)}
+
+        .card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);box-shadow:0 16px 56px rgba(0,0,0,.6);overflow:hidden;margin-bottom:24px}
+        .card-head{display:flex;align-items:center;gap:14px;padding:20px 26px;border-bottom:1px solid var(--bdr)}
+        .ci{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+        .ct{font-size:1.08rem;font-weight:800}
+        .cs{font-size:.73rem;color:var(--muted);margin-top:3px}
+        .cb{padding:26px}
+
+        /* Avyaya grid */
+        .avgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:10px;margin-bottom:22px}
+        .avcard{background:var(--s2);border:1px solid var(--bdr2);border-radius:14px;padding:15px 16px;text-align:center;border-top:3px solid}
+        .avsk{font-family:'Tiro Devanagari Sanskrit',serif;font-size:1.5rem;margin-bottom:4px}
+        .avkn{font-size:.77rem;color:var(--muted);margin-bottom:5px}
+        .avtype{font-size:.63rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+        .avex{font-family:'Tiro Devanagari Sanskrit',serif;font-size:.74rem;color:var(--muted);margin-top:5px;font-style:italic}
+
+        /* Quiz styles (same as other levels) */
+        .qbw{height:6px;background:var(--s3);border-radius:3px;margin-bottom:22px;overflow:hidden}
+        .qb{height:100%;background:linear-gradient(90deg,var(--saffron),var(--gold));border-radius:3px;transition:width .5s}
+        .qsc{text-align:center;font-size:.8rem;color:var(--muted);margin-bottom:6px}
+        .qsc b{color:var(--gold2)}
+        .qcard{background:var(--s2);border:1px solid var(--bdr2);border-radius:var(--r);padding:28px;text-align:center;margin-bottom:18px}
+        .qnum{font-size:.67rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+        .qq{font-size:1.06rem;font-weight:700;margin-bottom:6px;line-height:1.5}
+        .qsub{font-family:'Tiro Devanagari Sanskrit',serif;font-size:1.55rem;color:var(--gold2);margin-top:7px;line-height:1.8}
+        .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px}
+        @media(max-width:480px){.opts{grid-template-columns:1fr}}
+        .opt{background:var(--s2);border:2px solid var(--bdr2);border-radius:var(--r2);padding:14px;cursor:pointer;text-align:center;font-family:'Tiro Devanagari Sanskrit',serif;font-size:1rem;color:var(--txt);transition:all .2s;line-height:1.6}
+        .opt .ol{display:block;font-family:'Inter',sans-serif;font-size:.62rem;color:var(--muted2);margin-bottom:3px}
+        .opt:hover:not([disabled]){border-color:var(--saffron);transform:scale(1.025)}
+        .opt.ok{border-color:var(--neut)!important;background:rgba(52,211,153,.12)!important;color:#6ee7b7!important}
+        .opt.wrong{border-color:var(--fem)!important;background:rgba(244,114,182,.1)!important;color:#fbcfe8!important}
+        .opt[disabled]{cursor:default}
+        .fb{border-radius:var(--r2);padding:13px 16px;margin-bottom:14px;font-size:.82rem;line-height:1.6}
+        .fb.ok{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.28);color:#6ee7b7}
+        .fb.wrong{background:rgba(244,114,182,.08);border:1px solid rgba(244,114,182,.28);color:#fbcfe8}
+        .rp{text-align:center;padding:44px 16px}
+        .rem{font-size:4.2rem;display:block;margin-bottom:14px}
+        .rscore{font-size:4rem;font-weight:900;margin-bottom:8px}
+        .rscore.win{background:linear-gradient(135deg,var(--neut),#6ee7b7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .rscore.lose{background:linear-gradient(135deg,var(--fem),#fbcfe8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .rmsg{font-size:1.1rem;font-weight:700;margin-bottom:14px}
+        .rdots{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+        .rdot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700}
+        .rdot.ok{background:rgba(52,211,153,.18);border:2px solid rgba(52,211,153,.45);color:#6ee7b7}
+        .rdot.wrong{background:rgba(244,114,182,.18);border:2px solid rgba(244,114,182,.45);color:#fbcfe8}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:50px;border:none;font-size:.86rem;font-weight:700;cursor:pointer;transition:all .22s;text-decoration:none}
+        .bp{background:linear-gradient(135deg,var(--saffron),#c2410c);color:#fff}.bp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(249,115,22,.42)}
+        .bg{background:var(--s2);color:var(--txt);border:1px solid var(--bdr2)}.bg:hover{border-color:var(--gold);color:var(--gold)}
+        .bv{background:linear-gradient(135deg,var(--self),#7c3aed);color:#fff}.bv:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(167,139,250,.4)}
+        .btn:disabled{opacity:.4;cursor:default;transform:none!important;box-shadow:none!important}
+        .brow{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+        .hidden{display:none!important}
+    </style>
+</head>
+<body>
+    <button id="lang-toggle" onclick="toggleLang()">
+        <span>🌐</span><span id="lang-label">ಕನ್ನಡ</span>
+    </button>
+
+    <div class="app">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1 class="om">ॐ</h1>
+
+        <div class="tnav" id="tnav4">
+            <button class="tb on" onclick="showT('p4-tbl',this,'tnav4');buildAvyaya()">💡 Avyaya Guide</button>
+            <button class="tb" onclick="showT('p4-quiz',this,'tnav4');initQ(4)">🏆 Part 4 Quiz</button>
+        </div>
+
+        <div id="p4-tbl">
+            <div class="card">
+                <div class="card-head"><div class="ci" style="background:rgba(167,139,250,.15)">💡</div><div><div class="ct">Avyayas — Indeclinables</div><div class="cs">Words that never change form</div></div></div>
+                <div class="cb">
+                    <div style="background:var(--s2);border-radius:12px;padding:16px;margin-bottom:20px;border-left:3px solid var(--self);font-size:.84rem;color:var(--muted);line-height:1.7" id="avy-def">
+                        Avyaya = A word that never changes. Three types: <b style="color:var(--gold2)">Time (अद्य, श्वः, ह्यः)</b>, <b style="color:var(--gold2)">Place (कुत्र, अत्र, तत्र)</b>, <b style="color:var(--gold2)">Manner (शीघ्रम्, मन्दम्, उच्चैः)</b>
+                    </div>
+                    <div class="avgrid" id="avg"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="p4-quiz" class="hidden">
+            <div class="card"><div class="card-head"><div class="ci" style="background:rgba(167,139,250,.15)">🏆</div><div><div class="ct">Part 4 Quiz — Avyayas</div><div class="cs"><b style="color:var(--saffron)">10/10 → Unlocks Grand Exam!</b></div></div></div>
+                <div class="cb" id="quiz-4-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ---------- Profile & lang ----------
+        const SK_KEY = 'sk_player';
+        let LANG = 'e';
+        function L(k,e){ return LANG==='k' ? k : e; }
+        function loadPlayer(){ try{ return JSON.parse(localStorage.getItem(SK_KEY)||'null'); }catch(e){ return null; } }
+        function savePlayer(pl){ localStorage.setItem(SK_KEY, JSON.stringify(pl)); }
+
+        // ---------- Avyaya data ----------
+        const AVYAYAS = [
+          {sk:'कुत्र',k:'ಎಲ್ಲಿ?',e:'Where?',type:{k:'ಸ್ಥಳ',e:'Place'},col:'#60a5fa',ex:'बालकः कुत्र गच्छति?'},
+          {sk:'अत्र',k:'ಇಲ್ಲಿ',e:'Here',type:{k:'ಸ್ಥಳ',e:'Place'},col:'#60a5fa',ex:'पुस्तकम् अत्र अस्ति'},
+          {sk:'तत्र',k:'ಅಲ್ಲಿ',e:'There',type:{k:'ಸ್ಥಳ',e:'Place'},col:'#60a5fa',ex:'यत्र धूमः तत्र अग्निः'},
+          {sk:'सर्वत्र',k:'ಎಲ್ಲೆಡೆ',e:'Everywhere',type:{k:'ಸ್ಥಳ',e:'Place'},col:'#60a5fa',ex:'देवः सर्वत्र अस्ति'},
+          {sk:'अद्य',k:'ಇಂದು',e:'Today',type:{k:'ಕಾಲ',e:'Time'},col:'#f59e0b',ex:'अद्य सोमवासरः'},
+          {sk:'श्वः',k:'ನಾಳೆ',e:'Tomorrow',type:{k:'ಕಾಲ',e:'Time'},col:'#f59e0b',ex:'सः श्वः आगमिष्यति'},
+          {sk:'ह्यः',k:'ನಿನ್ನೆ',e:'Yesterday',type:{k:'ಕಾಲ',e:'Time'},col:'#f59e0b',ex:'माता ह्यः पाकं कृतवती'},
+          {sk:'उच्चैः',k:'ಜೋರಾಗಿ',e:'Loudly',type:{k:'ರೀತಿ',e:'Manner'},col:'#f472b6',ex:'सः उच्चैः पठति'},
+          {sk:'मन्दम्',k:'ನಿಧಾನ',e:'Slowly',type:{k:'ರೀತಿ',e:'Manner'},col:'#f472b6',ex:'गजः मन्दम् चलति'},
+          {sk:'शीघ्रम्',k:'ಬೇಗ',e:'Quickly',type:{k:'ರೀತಿ',e:'Manner'},col:'#f472b6',ex:'अश्वः शीघ्रम् धावति'},
+          {sk:'च',k:'ಮತ್ತು',e:'And',type:{k:'ಸಂಯೋಜಕ',e:'Conjunction'},col:'#34d399',ex:'रामः कृष्णः च क्रीडतः'},
+          {sk:'अपि',k:'ಸಹ',e:'Also',type:{k:'ಪ್ರಾಕ್ಷೇಪ',e:'Emphatic'},col:'#a78bfa',ex:'अहम् अपि पठामि'},
+          {sk:'एव',k:'ಮಾತ್ರ',e:'Only/Indeed',type:{k:'ನಿರ್ಧಾರ',e:'Emphasis'},col:'#fb923c',ex:'सत्यम् एव जयते'},
+          {sk:'वा',k:'ಅಥವಾ',e:'Or',type:{k:'ಸಂಯೋಜಕ',e:'Conjunction'},col:'#34d399',ex:'राम: वा कृष्णः आगच्छतु'}
+        ];
+
+        // ---------- Part 4 question bank (50 Q) ----------
+        const part4Bank = [
+          {q:{k:"___ रविवारः। (ಇಂದು)",e:"___ is Sunday. (Today)"},o:["अद्य","तत्र","कुत्र","श्वः"],a:0},
+          {q:{k:"अहं ___ न गच्छामि। (ಇಂದು)",e:"I am not going ___. (Today)"},o:["एव","अद्य","वा","ह्यः"],a:1},
+          {q:{k:"सा ___ पठति। (ಇಂದು)",e:"She reads ___. (Today)"},o:["कुत्र","तत्र","अद्य","श्वः"],a:2},
+          {q:{k:"___ अवकाशः अस्ति। (ಇಂದು)",e:"There is a holiday ___. (Today)"},o:["अद्य","उच्चैः","मन्दम्","एव"],a:0},
+          {q:{k:"सः ___ आगच्छति। (ಇಂದು)",e:"He comes ___. (Today)"},o:["वा","अद्य","तु","अपि"],a:1},
+          {q:{k:"___ सोमवासरः। (ನಾಳೆ)",e:"___ is Monday. (Tomorrow)"},o:["अद्य","ह्यः","श्वः","तत्र"],a:2},
+          {q:{k:"सः ___ गमिष्यति। (ನಾಳೆ)",e:"He will go ___. (Tomorrow)"},o:["श्वः","एव","अत्र","अद्य"],a:0},
+          {q:{k:"अहं ___ पठिष्यामि। (ನಾಳೆ)",e:"I will read ___. (Tomorrow)"},o:["उच्चैः","श्वः","कुत्र","मन्दम्"],a:1},
+          {q:{k:"___ परीक्षा अस्ति। (ನಾಳೆ)",e:"___ is the exam. (Tomorrow)"},o:["मन्दम्","तु","श्वः","ह्यः"],a:2},
+          {q:{k:"ते ___ आगमिष्यन्ति। (ನಾಳೆ)",e:"They will come ___. (Tomorrow)"},o:["श्वः","ह्यः","अद्य","तत्र"],a:0},
+          {q:{k:"___ शनिवासरः आसीत्। (ನಿನ್ನೆ)",e:"___ was Saturday. (Yesterday)"},o:["श्वः","ह्यः","अद्य","एव"],a:1},
+          {q:{k:"सः ___ आगतवान्। (ನಿನ್ನೆ)",e:"He came ___. (Yesterday)"},o:["एव","अत्र","ह्यः","श्वः"],a:2},
+          {q:{k:"अहं ___ तत्र गतवान्। (ನಿನ್ನೆ)",e:"I went there ___. (Yesterday)"},o:["ह्यः","कुत्र","वा","अद्य"],a:0},
+          {q:{k:"___ वृष्टिः आसीत्। (ನಿನ್ನೆ)",e:"It rained ___. (Yesterday)"},o:["उच्चैः","ह्यः","मन्दम्","श्वः"],a:1},
+          {q:{k:"सा ___ उक्तवती। (ನಿನ್ನೆ)",e:"She said ___. (Yesterday)"},o:["श्वः","अद्य","ह्यः","एव"],a:2},
+          {q:{k:"भवान् ___ उपविशतु। (ಇಲ್ಲಿ)",e:"You sit ___. (Here)"},o:["अत्र","श्वः","ह्यः","तत्र"],a:0},
+          {q:{k:"जलं ___ अस्ति। (ಇಲ್ಲಿ)",e:"Water is ___. (Here)"},o:["वा","अत्र","तु","कुत्र"],a:1},
+          {q:{k:"सः ___ आगच्छति। (ಇಲ್ಲಿ)",e:"He comes ___. (Here)"},o:["एव","श्वः","अत्र","ह्यः"],a:2},
+          {q:{k:"___ कोलाहलः नास्ति। (ಇಲ್ಲಿ)",e:"There is no noise ___. (Here)"},o:["अत्र","ह्यः","श्वः","तत्र"],a:0},
+          {q:{k:"सा ___ लिखति। (ಇಲ್ಲಿ)",e:"She writes ___. (Here)"},o:["मन्दम्","अत्र","ह्यः","उच्चैः"],a:1},
+          {q:{k:"सः ___ वसति। (ಅಲ್ಲಿ)",e:"He lives ___. (There)"},o:["वा","तु","तत्र","अत्र"],a:2},
+          {q:{k:"भवान् ___ गच्छतु। (ಅಲ್ಲಿ)",e:"You go ___. (There)"},o:["तत्र","अद्य","श्वः","कुत्र"],a:0},
+          {q:{k:"वृष्टिः ___ भवति। (ಅಲ್ಲಿ)",e:"It rains ___. (There)"},o:["एव","तत्र","कुत्र","अत्र"],a:1},
+          {q:{k:"सिंहः ___ अस्ति। (ಅಲ್ಲಿ)",e:"Lion is ___. (There)"},o:["ह्यः","श्वः","तत्र","सर्वत्र"],a:2},
+          {q:{k:"सा ___ क्रीडति। (ಅಲ್ಲಿ)",e:"She plays ___. (There)"},o:["तत्र","अद्य","ह्यः","एव"],a:0},
+          {q:{k:"भवान् ___ गच्छति? (ಎಲ್ಲಿ)",e:"___ do you go? (Where)"},o:["अत्र","कुत्र","तत्र","सर्वत्र"],a:1},
+          {q:{k:"सा ___ वसति? (ಎಲ್ಲಿ)",e:"___ does she live? (Where)"},o:["एव","वा","कुत्र","तत्र"],a:2},
+          {q:{k:"मम पुस्तकं ___ अस्ति? (ಎಲ್ಲಿ)",e:"___ is my book? (Where)"},o:["कुत्र","अद्य","ह्यः","श्वः"],a:0},
+          {q:{k:"भवान् ___ आगतवान्? (ಎಲ್ಲಿ)",e:"___ did you come? (Where)"},o:["श्वः","कुत्र","अद्य","ह्यः"],a:1},
+          {q:{k:"नदी ___ प्रवहति? (ಎಲ್ಲಿ)",e:"___ does river flow? (Where)"},o:["तु","वा","कुत्र","तत्र"],a:2},
+          {q:{k:"वायुः ___ अस्ति। (ಎಲ್ಲೆಡೆ)",e:"Air is ___. (Everywhere)"},o:["सर्वत्र","कुत्र","तत्र","अत्र"],a:0},
+          {q:{k:"देवः ___ अस्ति। (ಎಲ್ಲೆಡೆ)",e:"God is ___. (Everywhere)"},o:["श्वः","सर्वत्र","ह्यः","अद्य"],a:1},
+          {q:{k:"प्रकाशः ___ अस्ति। (ಎಲ್ಲೆಡೆ)",e:"Light is ___. (Everywhere)"},o:["एव","वा","सर्वत्र","कुत्र"],a:2},
+          {q:{k:"आनन्दः ___ अस्ति। (ಎಲ್ಲೆಡೆ)",e:"Joy is ___. (Everywhere)"},o:["सर्वत्र","कुत्र","अत्र","तत्र"],a:0},
+          {q:{k:"जलं ___ अस्ति। (ಎಲ್ಲೆಡೆ)",e:"Water is ___. (Everywhere)"},o:["अद्य","सर्वत्र","ह्यः","श्वः"],a:1},
+          {q:{k:"सः ___ हसति। (ಜೋರಾಗಿ)",e:"He laughs ___. (Loudly)"},o:["मन्दम्","श्वः","उच्चैः","शीघ्रम्"],a:2},
+          {q:{k:"सिंहः ___ गर्जति। (ಜೋರಾಗಿ)",e:"Lion roars ___. (Loudly)"},o:["उच्चैः","ह्यः","अद्य","मन्दम्"],a:0},
+          {q:{k:"बालकः ___ रोदिति। (ಜೋರಾಗಿ)",e:"Boy cries ___. (Loudly)"},o:["सर्वत्र","उच्चैः","कुत्र","शीघ्रम्"],a:1},
+          {q:{k:"सा ___ वदति। (ಜೋರಾಗಿ)",e:"She speaks ___. (Loudly)"},o:["तत्र","अत्र","उच्चैः","मन्दम्"],a:2},
+          {q:{k:"श्वानः ___ भषति। (ಜೋರಾಗಿ)",e:"Dog barks ___. (Loudly)"},o:["उच्चैः","एव","वा","तु"],a:0},
+          {q:{k:"गजः ___ चलति। (ನಿಧಾನವಾಗಿ)",e:"Elephant walks ___. (Slowly)"},o:["उच्चैः","मन्दम्","श्वः","शीघ्रम्"],a:1},
+          {q:{k:"वृद्धः ___ गच्छति। (ನಿಧಾನವಾಗಿ)",e:"Old man goes ___. (Slowly)"},o:["ह्यः","अद्य","मन्दम्","उच्चैः"],a:2},
+          {q:{k:"कूर्मः ___ चलति। (ನಿಧಾನವಾಗಿ)",e:"Turtle walks ___. (Slowly)"},o:["मन्दम्","कुत्र","तत्र","शीघ्रम्"],a:0},
+          {q:{k:"पवनः ___ वाति। (ನಿಧಾನವಾಗಿ)",e:"Wind blows ___. (Slowly)"},o:["एव","मन्दम्","वा","उच्चैः"],a:1},
+          {q:{k:"सा ___ लिखति। (ನಿಧಾನವಾಗಿ)",e:"She writes ___. (Slowly)"},o:["उच्चैः","कुत्र","मन्दम्","शीघ्रम्"],a:2},
+          {q:{k:"भवान् ___ आगच्छतु। (ಬೇಗನೆ)",e:"You come ___. (Quickly)"},o:["शीघ्रम्","मन्दम्","ह्यः","उच्चैः"],a:0},
+          {q:{k:"अश्वः ___ धावति। (ಬೇಗನೆ)",e:"Horse runs ___. (Quickly)"},o:["श्वः","शीघ्रम्","अद्य","मन्दम्"],a:1},
+          {q:{k:"सः ___ खादति। (ಬೇಗನೆ)",e:"He eats ___. (Quickly)"},o:["कुत्र","तत्र","शीघ्रम्","उच्चैः"],a:2},
+          {q:{k:"सा ___ गच्छति। (ಬೇಗನೆ)",e:"She goes ___. (Quickly)"},o:["शीघ्रम्","वा","तु","मन्दम्"],a:0},
+          {q:{k:"यानं ___ चलति। (ಬೇಗನೆ)",e:"Vehicle moves ___. (Quickly)"},o:["मन्दम्","शीघ्रम्","उच्चैः","एव"],a:1}
+        ];
+
+        // ---------- Utility ----------
+        function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=0|Math.random()*(i+1);[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+        // ---------- Build Avyaya grid ----------
+        function buildAvyaya(){
+            document.getElementById('avg').innerHTML = AVYAYAS.map(a=>`<div class="avcard" style="border-top-color:${a.col}">
+                <div class="avsk" style="color:${a.col}">${a.sk}</div>
+                <div class="avkn">${LANG==='k'?a.k:a.e}</div>
+                <div class="avtype" style="color:${a.col}">${LANG==='k'?a.type.k:a.type.e}</div>
+                <div class="avex">${a.ex}</div>
+            </div>`).join('');
+        }
+
+        // ---------- Quiz engine (Part 4) ----------
+        const QST = {4:{sess:[],idx:0,ans:[],done:false,started:false}};
+
+        function initQ(part){
+            const s=QST[part];
+            if(s.started&&!s.done){ renderQ(part); return; }
+            if(s.done){ renderQResult(part); return; }
+            document.getElementById('quiz-4-body').innerHTML=`<div style="text-align:center;padding:40px 0">
+                <div style="font-size:3rem;margin-bottom:14px">📝</div>
+                <div style="font-size:1.1rem;font-weight:800;margin-bottom:8px">Avyaya Quiz</div>
+                <div style="font-size:.84rem;color:var(--muted);margin-bottom:18px">50‑Q bank · 10 random · <b style="color:var(--saffron)">10/10 to unlock!</b></div>
+                <button class="btn bp" onclick="startQ(4)">Start Quiz →</button>
+            </div>`;
+        }
+
+        function startQ(part){
+            const pool = shuffle([...part4Bank]).slice(0,10);
+            QST[part].sess = pool.map(q=>{
+                const si=shuffle([0,1,2,3]);
+                return {...q, so:si.map(i=>q.o[i]), sa:si.indexOf(q.a)};
+            });
+            QST[part].idx=0; QST[part].ans=[]; QST[part].done=false; QST[part].started=true;
+            renderQ(part);
+        }
+
+        function renderQ(part){
+            const s=QST[part], q=s.sess[s.idx], total=s.sess.length;
+            const pct=(s.idx/total)*100, answered=s.ans[s.idx]!==undefined;
+            const score=s.ans.reduce((t,a,i)=>t+(a===s.sess[i].sa?1:0),0);
+            const qText = LANG==='k'?q.q.k:q.q.e;
+            const hasSub = qText.includes('___');
+            document.getElementById('quiz-4-body').innerHTML=`
+                <div class="qsc">Q <b>${s.idx+1}</b>/${total} · Score: <b>${score}</b></div>
+                <div class="qbw"><div class="qb" style="width:${pct}%"></div></div>
+                <div class="qcard"><div class="qnum">Part 4 · Q${s.idx+1}</div>
+                    ${hasSub?`<div class="qsub">${qText}</div>`:`<div class="qq">${qText}</div>`}
+                </div>
+                <div class="opts">
+                    ${q.so.map((o,i)=>{
+                        let cls='opt';
+                        if(answered){if(i===q.sa)cls+=' ok';else if(i===s.ans[s.idx])cls+=' wrong';}
+                        return `<button class="${cls}" onclick="selQ(${part},${i})" ${answered?'disabled':''}><span class="ol">${['A','B','C','D'][i]}</span><span style="font-family:'Tiro Devanagari Sanskrit',serif">${o}</span></button>`;
+                    }).join('')}
+                </div>
+                ${answered?`<div class="fb ${s.ans[s.idx]===q.sa?'ok':'wrong'}">${s.ans[s.idx]===q.sa?'✅ Correct!':'❌ Wrong! ✔ '+q.so[q.sa]}</div>
+                <div class="brow"><button class="btn bp" onclick="${s.idx<total-1?'nextQ(4)':'submitQ(4)'}">${s.idx<total-1?'Next →':'Result 🏁'}</button></div>`:
+                `<div style="text-align:center;font-size:.74rem;color:var(--muted2)">Click an option</div>`}`;
+        }
+
+        function selQ(part,i){ const s=QST[part]; if(s.ans[s.idx]!==undefined) return; s.ans[s.idx]=i; renderQ(part); }
+        function nextQ(part){ QST[part].idx++; renderQ(part); }
+
+        function submitQ(part){
+            QST[part].done=true;
+            const s=QST[part], total=s.sess.length;
+            const score=s.ans.reduce((t,a,i)=>t+(a===s.sess[i].sa?1:0),0), win=score===total;
+            document.getElementById('quiz-4-body').innerHTML=`<div class="rp">
+                <span class="rem">${score===total?'🎉':'😔'}</span>
+                <div class="rscore ${win?'win':'lose'}">${score}/${total}</div>
+                <div class="rmsg">${win?'Congratulations! Grand Exam Unlocked!':'Try again!'}</div>
+                <div class="rdots">${s.ans.map((a,i)=>`<div class="rdot ${a===s.sess[i].sa?'ok':'wrong'}">${i+1}</div>`).join('')}</div>
+                <div class="brow">
+                    <button class="btn bg" onclick="QST[4]={sess:[],idx:0,ans:[],done:false,started:false};initQ(4)">↺ Retry</button>
+                    ${win?`<a href="grand-exam.html" class="btn bv">🏆 Grand Exam →</a>`:''}
+                </div>
+            </div>`;
+            if(win){
+                const pl = loadPlayer()||{name:'',lang:LANG,highestUnlockedLevel:1};
+                if(pl.highestUnlockedLevel < 5) pl.highestUnlockedLevel = 5;
+                savePlayer(pl);
+            }
+        }
+
+        // ---------- Tab switching ----------
+        function showT(id,btn,navId){
+            const nav=document.getElementById(navId); nav.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+            btn.classList.add('on');
+            document.querySelectorAll('[id^="p4-"]').forEach(el=>el.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        // ---------- Language toggle ----------
+        function toggleLang(){
+            LANG = LANG==='e'?'k':'e';
+            const pl = loadPlayer();
+            if(pl){ pl.lang = LANG; savePlayer(pl); }
+            document.getElementById('lang-label').textContent = LANG==='e'?'ಕನ್ನಡ':'English';
+            buildAvyaya();
+        }
+
+        // ---------- Init ----------
+        document.addEventListener('DOMContentLoaded',()=>{
+            const pl = loadPlayer();
+            LANG = (pl && pl.lang) || 'e';
+            document.getElementById('lang-label').textContent = LANG==='e'?'ಕನ್ನಡ':'English';
+            buildAvyaya();
+        });
+    </script>
+</body>
+</html>
